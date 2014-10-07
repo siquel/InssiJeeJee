@@ -32,5 +32,6 @@ public:
 	boost::signals2::signal<void(std::string)>& sig_receive();
 	~irc_client();
 	void connect(std::string const& hostname, std::string const& port);
+	void join_channel(std::string const& channel);
 };
 
