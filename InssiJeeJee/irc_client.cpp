@@ -54,14 +54,12 @@ void irc_client::receive(boost::system::error_code const& error, std::size_t byt
 
 	while (std::getline(is, line))
 	{
-		handle_line(line);
+		sig_receive()(line);
 	}
 
 	read();
 }
 
-// called whenever socket receives data from IRC
-void irc_client::handle_line(std::string& s) {
-	std::cout << s << std::endl;
+boost::signals2::signal<void(std::string)>& irc_client::sig_receive() {
+	return sig_recv;
 }
-

@@ -22,8 +22,11 @@ private:
 	void receive(boost::system::error_code const& error, std::size_t bytes);
 
 	boost::asio::streambuf buffer;
+	// signals
+	boost::signals2::signal<void(std::string)> sig_recv;
 public:
 	irc_client(std::string const& hostname, std::string const& port);
+	boost::signals2::signal<void(std::string)>& sig_receive();
 	~irc_client();
 	void connect();
 };
