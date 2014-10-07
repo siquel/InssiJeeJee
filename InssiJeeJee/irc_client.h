@@ -8,6 +8,8 @@ class irc_client
 private:
 	std::string hostname;
 	std::string port;
+	std::string login;
+	std::string nick;
 	
 	boost::asio::io_service io_service;
 	boost::asio::ip::tcp::socket socket;
@@ -20,14 +22,15 @@ private:
 	void read();
 	void handle_line(std::string& s);
 	void receive(boost::system::error_code const& error, std::size_t bytes);
+	void send_raw(std::string const& msg);
 
 	boost::asio::streambuf buffer;
 	// signals
 	boost::signals2::signal<void(std::string)> sig_recv;
 public:
-	irc_client(std::string const& hostname, std::string const& port);
+	irc_client(std::string const& nick, std::string const& ident);
 	boost::signals2::signal<void(std::string)>& sig_receive();
 	~irc_client();
-	void connect();
+	void connect(std::string const& hostname, std::string const& port);
 };
 

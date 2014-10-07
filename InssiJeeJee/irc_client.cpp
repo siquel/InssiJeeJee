@@ -1,8 +1,9 @@
 #include "irc_client.h"
+#include <boost/algorithm/string/predicate.hpp>
 using boost::asio::ip::tcp;
 
-irc_client::irc_client(std::string const& hostname, std::string const& port) : 
-	hostname(hostname), port(port), io_service(),  socket(io_service) {
+irc_client::irc_client(std::string const& nick, std::string const& ident) : 
+	nick(nick), login(ident), io_service(),  socket(io_service) {
 
 }
 
@@ -14,9 +15,10 @@ irc_client::~irc_client()
 	send_thread.join();
 }
 
-void irc_client::connect() {
+void irc_client::connect(std::string const& hostname, std::string const& port) {
 	using namespace boost::asio::ip;
-	
+	this->hostname = hostname;
+	this->port = port;
 	try {
 		tcp::resolver resolver(io_service);
 		tcp::resolver::query query(hostname, port);
@@ -28,6 +30,20 @@ void irc_client::connect() {
 		// TODO handle
 	}
 	start_read();
+	
+	send_raw(std::string("NICK ") + nick + std::string("\r\n"));
+	send_raw(std::string("USER ") + login + std::string(" 8 * :realname\r\n"));
+}
+
+void irc_client::send_raw(std::string const& msg) {
+	std::cout << "Sending >> " << msg << std::endl;
+	try {
+		boost::asio::write(socket,
+			boost::asio::buffer(msg.data(), msg.size()), boost::asio::transfer_all());
+	}
+	catch (boost::system::system_error& error) {
+		// todo handle
+	}
 }
 
 // start reading and start reading thread
@@ -54,12 +70,19 @@ void irc_client::receive(boost::system::error_code const& error, std::size_t byt
 
 	while (std::getline(is, line))
 	{
-		sig_receive()(line);
+		handle_line(line);
 	}
 
 	read();
 }
 
-boost::signals2::signal<void(std::string)>& irc_client::sig_receive() {
+void irc_client::handle_line(std::string &line) {
+	std::cout << line << std::endl;
+	if (boost::starts_with(line, "PING ")) {
+		send_raw(std::string("PONG ") + line.substr(5) + std::string("\r\n"));
+	}
+}
+
+boost::signals2::signal<void (std::string)>& irc_client::sig_receive() {
 	return sig_recv;
 }
