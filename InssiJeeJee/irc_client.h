@@ -33,5 +33,6 @@ public:
 	~irc_client();
 	void connect(std::string const& hostname, std::string const& port);
 	void join_channel(std::string const& channel);
+	void send_message(std::string channel, std::string message);
 };
 

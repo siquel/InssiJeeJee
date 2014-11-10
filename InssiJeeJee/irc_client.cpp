@@ -115,3 +115,7 @@ void irc_client::handle_line(std::string &line) {
 boost::signals2::signal<void (std::string)>& irc_client::sig_receive() {
 	return sig_recv;
 }
+
+void irc_client::send_message(std::string channel, std::string message) {
+	send_raw(std::string("PRIVMSG ") + channel + std::string(" :") + message + std::string("\r\n"));
+}

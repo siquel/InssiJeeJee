@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InssiJeeJee", "InssiJeeJee\InssiJeeJee.vcxproj", "{7B6AB627-F83E-4141-AA1A-E13935C571EE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{D90E1486-6F1C-4F76-A0FE-97C573C0482C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "perl", "perl\perl.vcxproj", "{3477C8FF-BEF1-4EEF-A8EF-A7530A124E58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,8 +19,15 @@ Global
 		{7B6AB627-F83E-4141-AA1A-E13935C571EE}.Debug|Win32.Build.0 = Debug|Win32
 		{7B6AB627-F83E-4141-AA1A-E13935C571EE}.Release|Win32.ActiveCfg = Release|Win32
 		{7B6AB627-F83E-4141-AA1A-E13935C571EE}.Release|Win32.Build.0 = Release|Win32
+		{3477C8FF-BEF1-4EEF-A8EF-A7530A124E58}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3477C8FF-BEF1-4EEF-A8EF-A7530A124E58}.Debug|Win32.Build.0 = Debug|Win32
+		{3477C8FF-BEF1-4EEF-A8EF-A7530A124E58}.Release|Win32.ActiveCfg = Release|Win32
+		{3477C8FF-BEF1-4EEF-A8EF-A7530A124E58}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3477C8FF-BEF1-4EEF-A8EF-A7530A124E58} = {D90E1486-6F1C-4F76-A0FE-97C573C0482C}
 	EndGlobalSection
 EndGlobal
