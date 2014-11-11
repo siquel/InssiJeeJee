@@ -60,7 +60,7 @@ static int execute_perl(SV* function, char* args) {
 	SPAGAIN;
 
 	// dirty hack
-	if (count == 0 && SvTRUE(ERRSV)) {
+	if ( SvTRUE(ERRSV)) {
 		printf("Perl error: %s\n", SvPV_nolen(ERRSV));
 		// remove undef 
 		if (!SvOK(POPs))
@@ -103,7 +103,7 @@ static int perl_load_file(char* scriptName) {
 
 int main() {
 	perl_init();
-	perl_load_file("test.pl");
+	printf("%d", perl_load_file("C:\\test.pl"));
 	perl_deinit();
 	return 0;
 }

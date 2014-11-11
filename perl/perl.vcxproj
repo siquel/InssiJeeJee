@@ -42,7 +42,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\perl\lib\CORE;$(IncludePath)</IncludePath>
     <LibraryPath>C:\perl\lib\CORE;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -61,7 +61,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>perl518.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>perl520.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>perl520.dll</DelayLoadDLLs>
     </Link>
     <PreBuildEvent>
       <Command>perl $(ProjectFolder)generate_header.pl</Command>
